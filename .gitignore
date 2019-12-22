@@ -1,0 +1,7 @@
+#gitignore for ASP.NET CORE applications
+
+/aspNetCoreShop/SportsStore/SportsStore/bin/*
+/aspNetCoreShop/SportsStore/SportsStore/obj/*
+
+/aspNetCoreShop/SportsStore/SportsStore.Tests/obj/*
+/aspNetCoreShop/SportsStore/SportsStore.Tests/bin/*
