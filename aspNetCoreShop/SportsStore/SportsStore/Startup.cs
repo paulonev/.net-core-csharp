@@ -37,6 +37,8 @@ namespace SportsStore
             services.AddScoped<Cart>(serv => SessionCart.GetCart(serv));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
             //NEW feature - support for sessions - a data which is associated with actions of a particular user
             services.AddMemoryCache();

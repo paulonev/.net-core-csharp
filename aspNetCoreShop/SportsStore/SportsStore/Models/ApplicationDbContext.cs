@@ -43,5 +43,10 @@ namespace SportsStore.Models
         /// </summary>
         public DbSet<Product> Products { get; set; }
         
+        /// <summary>
+        /// Provide read/write access to Order object in database
+        /// </summary>
+        public DbSet<Order> Orders { get; set; }
+        
     }
 }

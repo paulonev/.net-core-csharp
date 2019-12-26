@@ -34,8 +34,7 @@ namespace SportsStore.Controllers
 //                    TotalItems = _repository.Products.Count()
                     TotalItems = category == null ?
                         _repository.Products.Count() :
-                        _repository.Products.Where(e => 
-                            e.Category == category).Count()
+                        _repository.Products.Count(e => e.Category == category)
                 },
                 CurrentCategory = category
             });
