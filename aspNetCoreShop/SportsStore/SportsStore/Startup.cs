@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,11 +29,18 @@ namespace SportsStore
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite("Filename=SportsStore.db"));
-
+            
             //use FakeProductRepository which returns Products
             //or use storage that is connected to the SQLite with the help of Entity Framework Core
             services.AddTransient<IProductRepository, EFProductRepository>();
+            
+            services.AddScoped<Cart>(serv => SessionCart.GetCart(serv));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            //NEW feature - support for sessions - a data which is associated with actions of a particular user
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +61,7 @@ namespace SportsStore
             
 //            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
 //            app.UseRouting();
 
 //            app.UseAuthorization();
