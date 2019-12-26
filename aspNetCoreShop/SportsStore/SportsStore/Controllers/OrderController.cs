@@ -45,5 +45,27 @@ namespace SportsStore.Controllers
             cart.Clear();
             return View();
         }
+
+        //ADDITION to without-catalogManagement BLOCK
+        public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
+
+        /// <summary>
+        /// This method receives POST, which indicates Order ID
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult MarkShipped(int orderID)
+        {
+            Order order = repository.Orders
+                .FirstOrDefault(ord => ord.OrderID == orderID);
+            if (order != null)
+            {
+                order.Shipped = true;
+                repository.SaveOrder(order);
+            }
+
+            return RedirectToAction(nameof(List));
+        }
     }
 }

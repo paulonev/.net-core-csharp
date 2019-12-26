@@ -16,7 +16,15 @@ namespace SportsStore.Models
         /// Ordered products
         /// </summary>
         [BindNever] public ICollection<CartLine> Lines { get; set; }
+        
+        /// <summary>
+        /// Administration tool unique element that can be used to mark what Order are on their way to customers
+        /// </summary>
+        [BindNever] public bool Shipped { get; set; }
 
+        [Required(ErrorMessage = "Please enter your name")]
+        public string Name { get; set; }
+        
         /// <summary>
         /// Required attr checks a validity of inputted data in the field of form
         /// </summary>
