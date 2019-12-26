@@ -8,5 +8,9 @@ namespace SportsStore.Models
     public interface IProductRepository
     {
         IQueryable<Product> Products { get; }
+        
+        //The need to edit data in database entity
+        //Comes from AdminController - Edit
+        void SaveProduct(Product product);
     }
 }

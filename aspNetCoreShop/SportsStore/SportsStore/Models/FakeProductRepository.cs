@@ -6,7 +6,8 @@ namespace SportsStore.Models
     /// <summary>
     /// It's a fake storage that simulates the real data storage
     /// </summary>
-    public class FakeProductRepository : IProductRepository
+    public class FakeProductRepository 
+        //: IProductRepository
     {
         /// <summary>
         /// returns a collection of queryable objects
