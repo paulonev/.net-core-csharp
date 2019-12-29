@@ -9,8 +9,13 @@ namespace SportsStore.Models
     {
         IQueryable<Product> Products { get; }
         
-        //The need to edit data in database entity
-        //Comes from AdminController - Edit
+        /// <summary>
+        /// The need to edit data in database entity; comes from AdminController - Edit
+        /// </summary>
+        /// <returns></returns>
         void SaveProduct(Product product);
+
+        Product DeleteProduct(int productID);
+
     }
 }

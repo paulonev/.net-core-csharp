@@ -33,11 +33,36 @@ namespace SportsStore.Controllers
             if (ModelState.IsValid)
             {
                 repository.SaveProduct(product);
-                //data visualized by action method where user is redirected, i.e Index
+                // data visualized by Action Method where user is redirected, i.e Index
+                // a Session state facility that hosts data until it will be executed somewhere in code
                 TempData["message"] = $"{product.Name} has been saved";
                 return RedirectToAction("Index");
             }
             else return View(product);
+        }
+
+        /// <summary>
+        /// Creates new product and save it to database
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Create() => View("Edit", new Product());
+
+        
+        /// <summary>
+        /// Invokes DeleteProduct() of data storage which returns deleted Product
+        /// </summary>
+        /// <param name="productId">id of product to delete</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Delete(int productId)
+        {
+            Product deletedProduct = repository.DeleteProduct(productId);
+            if (deletedProduct != null)
+            {
+                TempData["message"] = $"{deletedProduct.Name} was deleted";
+            }
+
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

@@ -1,36 +1,44 @@
 @model Order
 
+
+<!-- FILL IN the ordering form -->
 <h2>Check out now</h2>
 <p>Please enter your details, and we'll ship your goods right away!</p>
 <div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Checkout" method="post">
-    <hЗ>Ship to</hЗ>
-    <br/>
-    <br/>
+    
     <div class="form-group">
-        <label>Name:</label><input asp-for="Name" class="form-control"/>
+        <span>Ship to</span>
+        <input asp-for="Name" class="form-control" placeholder="Your name"/>
     </div>
     <h3>Address</h3>
     <div class="form-group">
-        <label>Line 1:</label><input asp-for="AddrLine1" class="form-control"/>
+        <label>Line 1:</label>
+        <input asp-for="AddrLine1" class="form-control"/>
     </div>
     <div class="form-group">
-        <label>Line 2:</label><input asp-for="AddrLine2" class="form-control"/>
+        <label>Line 2:</label>
+        <input asp-for="AddrLine2" class="form-control"/>
     </div>
     <div class="form-group">
-        <label>Line 3:</label><input asp-for="AddrLine3" class="form-control"/>
+        <label>Line 3:</label>
+        <input asp-for="AddrLine3" class="form-control"/>
     </div>
     <div class="form-group">
-        <label>City:</label><input asp-for="City" class="form-control"/>
+        <label>City:</label>
+        <input asp-for="City" class="form-control"/>
     </div>
     <div class="form-group">
-        <label>State:</label><input asp-for="State" class="form-control"/>
+        <label>State:</label>
+        <input asp-for="State" class="form-control"/>
     </div>
     <div class="form-group">
-        <label>Zip:</label><input asp-for="Zip" class="form-control"/>
+        <label>Zip:</label>
+        <input asp-for="Zip" class="form-control"/>
     </div>
     <div class="form-group">
-        <label>Country:</label><input asp-for="Country" class="form-control"/>
+        <label>Country:</label>
+        <input asp-for="Country" class="form-control"/>
     </div>
     <hЗ>Options</hЗ>
     <div class="checkbox">
