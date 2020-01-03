@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportsStore.Models;
@@ -10,6 +11,7 @@ namespace SportsStore.Controllers
     /// Controller for CRUD(create, read, update, delete) actions over elements of Product collection
     /// Would be able to work only in Admin Mode(no plain user access) 
     /// </summary>
+    [Authorize] //authorization policy to keep Controller's AM more secure
     public class AdminController : Controller
     {
         private IProductRepository repository;

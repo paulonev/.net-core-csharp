@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using SportsStore.Models;
@@ -47,14 +48,17 @@ namespace SportsStore.Controllers
         }
 
         //ADDITION to without-catalogManagement BLOCK
+        [Authorize]
         public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
 
         /// <summary>
         /// This method receives POST, which indicates Order ID
+        /// Authorize attr makes Action Methods to be executed only if request is authorized 
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = repository.Orders

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,11 +28,26 @@ namespace SportsStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+//            services.AddDbContext<ApplicationDbContext>(options =>
+//                options.UseSqlite("Filename=SportsStore.db"));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite("Filename=SportsStore.db"));
+                options.UseSqlite(Configuration["Data:SportsStore:ConnectionString"]));
+
+            services.AddDbContext<AppIdentityDbContext>();
+            
+            //add Identity services
+            services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+                {
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireUppercase = false;
+                })
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
             
             //use FakeProductRepository which returns Products
-            //or use storage that is connected to the SQLite with the help of Entity Framework Core
+            //or use storage that is connected to the SQLite DB with the help of Entity Framework Core
             services.AddTransient<IProductRepository, EFProductRepository>();
             
             services.AddScoped<Cart>(serv => SessionCart.GetCart(serv));
@@ -66,7 +82,8 @@ namespace SportsStore
             app.UseSession();
 //            app.UseRouting();
 
-//            app.UseAuthorization();
+            //Install components for authentication processes
+            app.UseAuthentication();
 
 //            app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
             app.UseMvc(routes =>
@@ -110,6 +127,7 @@ namespace SportsStore
             
             //Fill in database with Products
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
