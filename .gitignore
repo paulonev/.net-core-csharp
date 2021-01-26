@@ -5,3 +5,7 @@
 
 /aspNetCoreShop/SportsStore/SportsStore.Tests/obj/*
 /aspNetCoreShop/SportsStore/SportsStore.Tests/bin/*
+
+/aspNetCoreShop/.idea/*
+/aspNetCoreShop/SportsStore/**/*.db
+/aspNetCoreShop/SportsStore/migrations/*
